@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Web.Script.Serialization;
 
 
 namespace RM_DataBase_classes.DataClass 
@@ -25,6 +27,7 @@ namespace RM_DataBase_classes.DataClass
         private int 				prop_speed;
         private int 				prop_successRate;
         private int 				prop_tpGain;
+
         
         public 	int id 				{ get{return this.prop_id;} 			set{this.prop_id = value;} }
         public 	int animationId 	{ get{return this.prop_animationId;} 	set{this.prop_animationId = value;} }
@@ -63,7 +66,6 @@ namespace RM_DataBase_classes.DataClass
         public 	int iconIndex 		{ get{return this.prop_iconIndex;} 		set{this.prop_iconIndex = value;} }
         public 	int itypeId 		{ get{return this.prop_itypeId;} 		set{this.prop_itypeId = value;} }
         public 	string name 		{ get{return this.prop_name;} 			set{this.prop_name = value;} }
-        public 	string note			{ get{return this.prop_note;} 			set{this.prop_note = value;} }
         public 	int occasion 		{ get{return this.prop_occasion;}		set{this.prop_occasion = value;} }
         public 	int price 			{ get{return this.prop_price;} 			set{this.prop_price = value;} }
         public 	int repeats 		{ get{return this.prop_repeats;} 		set{this.prop_repeats = value;} }
@@ -71,8 +73,20 @@ namespace RM_DataBase_classes.DataClass
         public 	int speed 			{ get{return this.prop_speed;} 			set{this.prop_speed = value;} }
         public 	int successRate 	{ get{return this.prop_successRate;} 	set{this.prop_successRate = value;} }
         public 	int tpGain 			{ get{return this.prop_tpGain;}			set{this.prop_tpGain = value;} }
+        public 	string note			
+        { 
+        	get{return this.prop_note;} 			
+        	set{this.prop_note = value;} 
+        }
+
         
+        [ScriptIgnore]
+        public Image icon {get{return DataBaseFiles.GetIcon(this.iconIndex);}}
         
+		public override string ToString()
+		{
+			return this.id + " : " + this.name;
+		}
 
         public Rm_DataBase_Item()
         {
