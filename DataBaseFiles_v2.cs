@@ -62,15 +62,15 @@ namespace RM_DataBase_classes
                 List<string> arrayFiles = new List<string>(Directory.GetFiles(this.dataProjectDirInfo.ToString()));
 				
                 //File name
-                string itemFP = this.dataProjectDirInfo.ToString() + DataBaseFiles.dataProjectItemsFile;
-                string weaponFP = this.dataProjectDirInfo.ToString() + DataBaseFiles.dataProjectItemsFile;
+                string itemFP = this.dataProjectDirInfo.ToString() + "\\" + DataBaseFiles.dataProjectItemsFile;
+                string weaponFP = this.dataProjectDirInfo.ToString() + "\\" + DataBaseFiles.dataProjectItemsFile;
                 // Image Todo modifier pour le chercher dans le bon rep
-                string iconSetFP = this.dataProjectDirInfo.ToString() + DataBaseFiles.dataProjectIconSet;
+                string iconSetFP = this.dataProjectDirInfo.ToString() + "\\..\\img\\system\\" + DataBaseFiles.dataProjectIconSet;
                 	
                 //File Found
                 this.itemDataLoaded = arrayFiles.Contains(itemFP);
                 this.WeaponsDataLoaded = arrayFiles.Contains(weaponFP);
-                DataBaseFiles.IconSetLoaded = arrayFiles.Contains(iconSetFP);
+                DataBaseFiles.IconSetLoaded = File.Exists(iconSetFP);
                 
                 // initialise Data
                 if (itemDataLoaded)
@@ -143,9 +143,11 @@ namespace RM_DataBase_classes
         public List<TypeObj> LoadJson<TypeObj>(string file)
 		{		
 			List<TypeObj> tmp = new List<TypeObj>(50);
-			
-			try { // Problème d'ouverture de fichier 
-				string str = System.IO.File.ReadAllText(file);
+            string str = "";
+
+
+            try { // Problème d'ouverture de fichier 
+				str = System.IO.File.ReadAllText(file);
 			} catch (Exception) {
 				
 				throw new Exception("Read file error");
@@ -162,7 +164,7 @@ namespace RM_DataBase_classes
 					tmp.Add(tmp_item);
 				}
 				return tmp;
-			} catch (e Exception) {
+			} catch (Exception e) {
 				// a voir si on change l'exception ou pas.
 				throw e;
 			}
