@@ -7,6 +7,7 @@
  * Pour changer ce modèle utiliser Outils | Options | Codage | Editer les en-têtes standards.
  */
 using System;
+using System.Drawing;
 
 namespace RM_DataBase_classes.DataClass 
 {
@@ -16,5 +17,11 @@ namespace RM_DataBase_classes.DataClass
 	public interface iRmDbObject
 	{
 		iRmDbObject Clone();
-	}
+
+        int id { get; set; }
+        string name { get; set; }
+        Image icon { get;}
+
+
+    }
 }

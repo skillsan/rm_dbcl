@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Web.Script.Serialization;
 
 
 namespace RM_DataBase_classes.DataClass 
@@ -30,7 +32,15 @@ namespace RM_DataBase_classes.DataClass
         public 	object[] p_params 	{ get{return this.prop_params;}			set{this.prop_params = value;} }
         public 	int price 			{ get{return this.prop_price;} 			set{this.prop_price = value;} }
         public 	int wtypeId 		{ get{return this.prop_wtypeId;} 		set{this.prop_wtypeId = value;} }
-        
+
+        [ScriptIgnore]
+        public Image icon { get { return DataBaseFiles.GetIcon(this.iconIndex); } }
+
+        public override string ToString()
+        {
+            return this.id + " : " + this.name;
+        }
+
         public Rm_DataBase_Weapon()
         {
 			this.id = 0;

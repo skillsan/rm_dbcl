@@ -15,7 +15,7 @@ namespace RM_DataBase_classes.DataClass
 	/// <summary>
 	/// Description of Rm_DataBase_Damage.
 	/// </summary>
-	public class Rm_DataBase_Damage : iRmDbObject
+	public class Rm_DataBase_Damage
 	{
 		private bool prop_critical;
 		private int prop_elementId;
@@ -47,7 +47,7 @@ namespace RM_DataBase_classes.DataClass
 			this.prop_variance = var;
 		}
 		
-		public iRmDbObject Clone()
+		public Rm_DataBase_Damage Clone()
 		{
 			Rm_DataBase_Damage newobj = new Rm_DataBase_Damage();
 			newobj.critical = this.prop_critical;

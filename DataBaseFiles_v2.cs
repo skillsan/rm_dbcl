@@ -21,11 +21,11 @@ namespace RM_DataBase_classes
         
         public static string dataProjectWeaponsFile = "Weapons.json";
         private List<Rm_DataBase_Weapon> JsonWeapons;
-        private bool WeaponsDataLoaded;
+        private bool weaponsDataLoaded;
         
         public static string dataProjectArmorsFile = "Armors.json";
-        //private JsonReader JsonArmors;
-        //private bool armorsDataLoaded;
+        private List<Rm_DataBase_Armor> JsonArmors;
+        private bool armorsDataLoaded;
         
         public static string dataProjectEnemiesFile = "Enemies.json";
         //private JsonReader JsonEnemies;
@@ -63,13 +63,15 @@ namespace RM_DataBase_classes
 				
                 //File name
                 string itemFP = this.dataProjectDirInfo.ToString() + "\\" + DataBaseFiles.dataProjectItemsFile;
-                string weaponFP = this.dataProjectDirInfo.ToString() + "\\" + DataBaseFiles.dataProjectItemsFile;
+                string weaponFP = this.dataProjectDirInfo.ToString() + "\\" + DataBaseFiles.dataProjectWeaponsFile;
+                string armorFP = this.dataProjectDirInfo.ToString() + "\\" + DataBaseFiles.dataProjectArmorsFile;
                 // Image Todo modifier pour le chercher dans le bon rep
                 string iconSetFP = this.dataProjectDirInfo.ToString() + "\\..\\img\\system\\" + DataBaseFiles.dataProjectIconSet;
                 	
                 //File Found
                 this.itemDataLoaded = arrayFiles.Contains(itemFP);
-                this.WeaponsDataLoaded = arrayFiles.Contains(weaponFP);
+                this.weaponsDataLoaded = arrayFiles.Contains(weaponFP);
+                this.armorsDataLoaded = arrayFiles.Contains(armorFP);
                 DataBaseFiles.IconSetLoaded = File.Exists(iconSetFP);
                 
                 // initialise Data
@@ -78,11 +80,16 @@ namespace RM_DataBase_classes
                     this.JsonItem 		= this.LoadJson<Rm_DataBase_Item>(itemFP);
                 }
                 
-                if (this.WeaponsDataLoaded)
+                if (this.weaponsDataLoaded)
                 {
                 	this.JsonWeapons 	= this.LoadJson<Rm_DataBase_Weapon>(weaponFP);
                 }
-                
+
+                if (this.armorsDataLoaded)
+                {
+                    this.JsonArmors = this.LoadJson<Rm_DataBase_Armor>(armorFP);
+                }
+
                 if (DataBaseFiles.IconSetLoaded)
                 {
                 	DataBaseFiles.iconSet = Image.FromFile(iconSetFP);
@@ -228,14 +235,29 @@ namespace RM_DataBase_classes
         public List<Rm_DataBase_Weapon> Weapons 
         { 
         	get { 
-        		if (!this.WeaponsDataLoaded)
-	        		throw new Exception("Weapon Data not loaded.");
+        		if (!this.weaponsDataLoaded)
+	        		throw new Exception("Weapons Data not loaded.");
 	        		
         		return this.JsonWeapons; 
         	}
         	set { this.JsonWeapons = value; } // todo non securisé
         }
-        
+
+        /// <summary>
+        /// List of Armor
+        /// </summary>
+        public List<Rm_DataBase_Armor> Armors
+        {
+            get
+            {
+                if (!this.armorsDataLoaded)
+                    throw new Exception("Armors Data not loaded.");
+
+                return this.JsonArmors;
+            }
+            set { this.JsonArmors = value; } // todo non securisé
+        }
+
         public List<Rm_DataBase_Item> CloneItemsList()
         {
         		List<Rm_DataBase_Item> cl = new List<Rm_DataBase_Item>(this.Items.Count);
