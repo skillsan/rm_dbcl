@@ -17,11 +17,5 @@ namespace RM_DataBase_classes.DataClass
 	public interface iRmDbObject
 	{
 		iRmDbObject Clone();
-
-        int id { get; set; }
-        string name { get; set; }
-        Image icon { get;}
-
-
     }
 }

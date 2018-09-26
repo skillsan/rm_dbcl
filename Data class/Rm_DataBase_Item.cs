@@ -6,22 +6,16 @@ using System.Web.Script.Serialization;
 
 namespace RM_DataBase_classes.DataClass 
 {
-	public class Rm_DataBase_Item : iRmDbObject
+	public class Rm_DataBase_Item : Rm_DataBase_Object_Base
 
     {
-        private int 				prop_id;
         private int 				prop_animationId;
         private bool 				prop_consumable;
         private Rm_DataBase_Damage  prop_damage;
-        private string 				prop_description;
         private object[] 			prop_effects;
         private int 				prop_hitType;
-        private int 				prop_iconIndex;
         private int 				prop_itypeId;
-        private string 				prop_name;
-        private string 				prop_note;
         private int 				prop_occasion;
-        private int 				prop_price;
         private int 				prop_repeats;
         private int 				prop_scope;
         private int 				prop_speed;
@@ -29,7 +23,6 @@ namespace RM_DataBase_classes.DataClass
         private int 				prop_tpGain;
 
         
-        public 	int id 				{ get{return this.prop_id;} 			set{this.prop_id = value;} }
         public 	int animationId 	{ get{return this.prop_animationId;} 	set{this.prop_animationId = value;} }
         public 	bool consumable		{ get{return this.prop_consumable;} 	set{this.prop_consumable = value;} }
         public  Dictionary<string, object> damage 
@@ -60,29 +53,16 @@ namespace RM_DataBase_classes.DataClass
         			this.prop_damage = new Rm_DataBase_Damage();
         	}
         }
-        public 	string description 	{ get{return this.prop_description;} 	set{this.prop_description = value;} }
         public 	object[] effects 	{ get{return this.prop_effects;} 		set{this.prop_effects = value;} }
         public 	int hitType 		{ get{return this.prop_hitType;} 		set{this.prop_hitType = value;} }
-        public 	int iconIndex 		{ get{return this.prop_iconIndex;} 		set{this.prop_iconIndex = value;} }
         public 	int itypeId 		{ get{return this.prop_itypeId;} 		set{this.prop_itypeId = value;} }
-        public 	string name 		{ get{return this.prop_name;} 			set{this.prop_name = value;} }
         public 	int occasion 		{ get{return this.prop_occasion;}		set{this.prop_occasion = value;} }
-        public 	int price 			{ get{return this.prop_price;} 			set{this.prop_price = value;} }
         public 	int repeats 		{ get{return this.prop_repeats;} 		set{this.prop_repeats = value;} }
         public 	int scope 			{ get{return this.prop_scope;} 			set{this.prop_scope = value;} }
         public 	int speed 			{ get{return this.prop_speed;} 			set{this.prop_speed = value;} }
         public 	int successRate 	{ get{return this.prop_successRate;} 	set{this.prop_successRate = value;} }
         public 	int tpGain 			{ get{return this.prop_tpGain;}			set{this.prop_tpGain = value;} }
-        public 	string note			
-        { 
-        	get{return this.prop_note;} 			
-        	set{this.prop_note = value;} 
-        }
-
-        
-        [ScriptIgnore]
-        public Image icon {get{return DataBaseFiles.GetIcon(this.iconIndex);}}
-        
+               
 		public override string ToString()
 		{
 			return this.id + " : " + this.name;
@@ -110,7 +90,7 @@ namespace RM_DataBase_classes.DataClass
         	this.tpGain = 0;
         }
         
-        public iRmDbObject Clone(){
+        public new iRmDbObject Clone(){
         	Rm_DataBase_Item newObj = new Rm_DataBase_Item();
         	newObj.id = this.id;
         	newObj.animationId = this.animationId;
